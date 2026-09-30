@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamental 1 | Class 4 – Personal Profiles</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        h1, h2, h3, h4, h5, .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-nunito { font-family: 'Nunito', sans-serif; }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out forwards; }
+        
+        .correct-highlight { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important;}
+        .wrong-highlight { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important;}
+        
+        .toast { position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; border-radius: 8px; color: white; font-weight: bold; opacity: 0; transition: opacity 0.3s, transform 0.3s; transform: translateY(20px); pointer-events: none; z-index: 1000; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast-success { background-color: #10b981; }
+        .toast-error { background-color: #ef4444; }
+
+        .transition-box { background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-left: 4px solid #6366f1; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; }
+        .transition-box h4 { color: #3730a3; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .transition-box p { color: #334155; font-size: 0.9rem; line-height: 1.6; }
+        
+        .instruction-box { background: #fff7ed; border-left: 4px solid #f97316; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
+        .instruction-box h4 { color: #9a3412; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .instruction-box ol, .instruction-box ul { color: #334155; font-size: 0.88rem; line-height: 1.7; padding-left: 20px; list-style-type: decimal;}
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .droppable { min-height: 40px; border: 2px dashed #cbd5e1; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; background: #f8fafc; transition: all 0.2s; padding: 0.5rem;}
+        
+        /* Smartphone UI */
+        .smartphone-ui {
+            width: 320px; height: 600px; border: 12px solid #1e293b; border-radius: 36px;
+            background: #fff; position: relative; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            margin: 0 auto;
+        }
+        .smartphone-notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 24px; background: #1e293b; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; z-index: 10;
+        }
+        
+        @media print {
+            .no-print { display: none !important; }
+            .smartphone-ui { box-shadow: none; border-color: #000; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-slate-900 text-white shadow-2xl relative overflow-hidden border-b-4 border-rose-500 no-print">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-rose-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-amber-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/3 -translate-x-1/4"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 py-8 relative z-10">
+            <div class="mb-6">
+                <img src="https://www.colomboamericano.edu.co/wp-content/uploads/2024/06/Logo-Colombo-Horizontal.png" alt="Colombo Americano Logo" class="h-10 md:h-12 bg-white/95 p-2 rounded-lg shadow-sm">
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="flex items-center gap-5">
+                    <div class="h-16 w-16 md:h-20 md:w-20 bg-white rounded-2xl p-2 shadow-lg flex items-center justify-center text-4xl">
+                        🤳
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-2 flex items-center font-poppins">
+                            Fundamental 1
+                        </h1>
+                        <p class="text-slate-300 text-sm md:text-base font-medium tracking-wide uppercase">Class 4 <span class="text-rose-400 mx-2">•</span> Personal Profiles</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md border border-white/10 shadow-xl max-w-md w-full md:w-auto">
+                    <h2 class="text-xl font-bold text-amber-300 mb-3 border-b border-white/20 pb-2">🎯 Today's Mission</h2>
+                    <ul class="text-sm text-slate-100 space-y-2">
+                        <li class="flex items-start"><i class="fa-solid fa-check-circle text-rose-400 mt-1 mr-2"></i> <strong>Review</strong> occupations with an interactive game.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check-circle text-rose-400 mt-1 mr-2"></i> <strong>Master</strong> dates, months, and birthday questions.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check-circle text-rose-400 mt-1 mr-2"></i> <strong>Understand</strong> articles (a/an) and plural nouns.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check-circle text-rose-400 mt-1 mr-2"></i> <strong>Apply</strong> the Verb 'To Be' and its functions.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check-circle text-rose-400 mt-1 mr-2"></i> <strong>Design</strong> a Social Media Bio for your digital profile.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200 no-print">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex space-x-2 overflow-x-auto py-3 no-scrollbar" id="tab-container">
+                <button onclick="switchTab('tab-warmup')" id="btn-tab-warmup" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 bg-slate-800 text-white shadow-md whitespace-nowrap">
+                    1. 🤔 Warm-up
+                </button>
+                <button onclick="switchTab('tab-dates')" id="btn-tab-dates" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 text-slate-500 hover:bg-slate-100 whitespace-nowrap">
+                    2. 📅 Dates
+                </button>
+                <button onclick="switchTab('tab-listening')" id="btn-tab-listening" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 text-slate-500 hover:bg-slate-100 whitespace-nowrap">
+                    3. 🎧 Listening Lab
+                </button>
+                <button onclick="switchTab('tab-nouns')" id="btn-tab-nouns" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 text-slate-500 hover:bg-slate-100 whitespace-nowrap">
+                    4. 📝 Nouns & Articles
+                </button>
+                <button onclick="switchTab('tab-tobe')" id="btn-tab-tobe" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 text-slate-500 hover:bg-slate-100 whitespace-nowrap">
+                    5. 🅰️️ Verb To Be
+                </button>
+                <button onclick="switchTab('tab-mission')" id="btn-tab-mission" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 text-slate-500 hover:bg-slate-100 whitespace-nowrap">
+                    6. 🏁 Social Bio
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <section id="tab-warmup" class="tab-content active no-print">
+            <div class="transition-box border-l-rose-500 bg-rose-50">
+                <h4 class="text-rose-800"><i class="fa-solid fa-question-circle"></i> Welcome back!</h4>
+                <p>Let's wake up our brains! In our last class, we looked at jobs and occupations. Let's play a game of "What am I?" to review the vocabulary.</p>
+            </div>
+
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-list-ol"></i> Activity 1: What am I? (Trivia Match)</h4>
+                <ol>
+                    <li>Read the clues about the person's job on the main screen.</li>
+                    <li>Click the correct occupation button below it.</li>
+                    <li>Beat all 10 levels!</li>
+                </ol>
+            </div>
+
+            <div class="bg-slate-900 rounded-3xl p-8 shadow-2xl relative overflow-hidden mb-10 text-center text-white">
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fb7185 2px, transparent 2px); background-size: 30px 30px;"></div>
+                
+                <div id="job-trivia-container" class="relative z-10 max-w-3xl mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Job Trivia</span>
+                        <span id="job-trivia-progress" class="text-rose-300 font-bold text-sm">Question 1 / 10</span>
+                    </div>
+
+                    <div class="bg-slate-800 border-2 border-rose-500 rounded-2xl p-8 min-h-[160px] flex items-center justify-center text-center shadow-inner mb-8">
+                        <p id="job-trivia-question" class="text-2xl md:text-3xl font-medium font-poppins text-white leading-snug">
+                            Press "Start Game" to begin!
+                        </p>
+                    </div>
+
+                    <div id="job-trivia-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button onclick="startJobTrivia()" class="md:col-span-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xl px-12 py-4 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.4)] transform hover:scale-105 transition-all">
+                            START GAME 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                 <button onclick="switchTab('tab-dates')" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg transform hover:-translate-y-1">Next: Dates & Months 📅 <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </section>
+
+        <section id="tab-dates" class="tab-content no-print">
+            <div class="transition-box border-l-amber-500 bg-amber-50">
+                <h4 class="text-amber-800"><i class="fa-solid fa-calendar-days"></i> When is your birthday?</h4>
+                <p>Dates are critical for personal information, forms, and appointments. To say a date in English, we need the <strong>Months</strong> and the <strong>Ordinal Numbers</strong> (1st, 2nd, 3rd).</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">Months of the Year</h3>
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">January</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">February</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">March</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">April</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">May</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">June</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">July</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">August</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">September</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">October</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">November</div>
+                            <div class="bg-slate-50 p-2 text-xs rounded border border-slate-200 font-bold text-slate-700">December</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">How to write Dates 🇺🇸</h3>
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-center">
+                            <p class="text-sm font-bold text-slate-600 uppercase tracking-wider mb-2">The Formula</p>
+                            <div class="flex items-center justify-center gap-2 text-xl font-black text-slate-800 bg-white py-3 rounded-lg shadow-sm border border-amber-100 mb-3">
+                                <span class="text-amber-600">Month</span> + <span class="text-blue-600">Ordinal Day</span>
+                            </div>
+                            <p class="text-sm font-medium text-slate-700">Example: <strong class="text-amber-600">August</strong> <strong class="text-blue-600">14th</strong></p>
+                            <p class="text-sm font-medium text-slate-700 mt-1">Numbers: <strong class="text-slate-900">08 / 14</strong></p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-200 text-center mt-3">
+                            <p class="text-sm font-bold text-blue-800 mb-1">"When is your birthday?"</p>
+                            <p class="text-sm font-medium text-slate-700">"My birthday is <strong class="text-blue-600">on</strong> October 31st."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-slate-800 mb-2 border-b pb-2">Ordinal Numbers (For the Days)</h3>
+                <div class="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-10 gap-1 text-center text-[10px] font-medium text-slate-700">
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">1st</strong><br>First</div>
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">2nd</strong><br>Second</div>
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">3rd</strong><br>Third</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">4th</strong><br>Fourth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">5th</strong><br>Fifth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">6th</strong><br>Sixth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">7th</strong><br>Seventh</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">8th</strong><br>Eighth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">9th</strong><br>Ninth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">10th</strong><br>Tenth</div>
+                    <!-- Teens -->
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">11th</strong><br>Eleventh</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">12th</strong><br>Twelfth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">13th</strong><br>Thirteenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">14th</strong><br>Fourteenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">15th</strong><br>Fifteenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">16th</strong><br>Sixteenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">17th</strong><br>Seventeenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">18th</strong><br>Eighteenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">19th</strong><br>Nineteenth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">20th</strong><br>Twentieth</div>
+                    <!-- Twenties & Thirty -->
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">21st</strong><br>Twenty-first</div>
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">22nd</strong><br>Twenty-second</div>
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">23rd</strong><br>Twenty-third</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">24th</strong><br>Twenty-fourth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">25th</strong><br>Twenty-fifth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">26th</strong><br>Twenty-sixth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">27th</strong><br>Twenty-seventh</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">28th</strong><br>Twenty-eighth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">29th</strong><br>Twenty-ninth</div>
+                    <div class="p-1 bg-slate-50 border border-slate-100"><strong class="text-slate-600 text-sm">30th</strong><br>Thirtieth</div>
+                    <div class="p-1 bg-amber-50 border border-amber-200"><strong class="text-amber-600 text-sm">31st</strong><br>Thirty-first</div>
+                </div>
+            </div>
+
+            <!-- Activity 2: Famous Birthdays -->
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-list-ol"></i> Activity 2: Celebrity Birthdays</h4>
+                <ol>
+                    <li>Look at the mini-profiles of these famous people.</li>
+                    <li>Answer the multiple-choice questions about their birthdays.</li>
+                </ol>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Celeb 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-3">⚽</div>
+                    <h4 class="font-black text-slate-800 text-lg">Lionel Messi</h4>
+                    <p class="text-sm font-bold text-slate-500 mb-2">Athlete</p>
+                    <div class="bg-slate-50 py-2 rounded-lg border border-slate-100">
+                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">DOB (Date of Birth)</p>
+                        <p class="font-black text-amber-600">06 / 24</p>
+                    </div>
+                </div>
+                <!-- Celeb 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 text-center">
+                    <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-3">🎤</div>
+                    <h4 class="font-black text-slate-800 text-lg">Shakira</h4>
+                    <p class="text-sm font-bold text-slate-500 mb-2">Singer</p>
+                    <div class="bg-slate-50 py-2 rounded-lg border border-slate-100">
+                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">DOB (Date of Birth)</p>
+                        <p class="font-black text-amber-600">02 / 02</p>
+                    </div>
+                </div>
+                <!-- Celeb 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 text-center">
+                    <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center text-4xl mx-auto mb-3">🎬</div>
+                    <h4 class="font-black text-slate-800 text-lg">Zendaya</h4>
+                    <p class="text-sm font-bold text-slate-500 mb-2">Actress</p>
+                    <div class="bg-slate-50 py-2 rounded-lg border border-slate-100">
+                        <p class="text-xs uppercase text-slate-400 font-bold tracking-wider">DOB (Date of Birth)</p>
+                        <p class="font-black text-amber-600">09 / 01</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" id="celeb-mcq-container">
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm" id="c-mcq-1">
+                    <p class="font-medium text-slate-800 text-sm mb-3">1. When is Messi's birthday?</p>
+                    <div class="flex flex-col gap-2">
+                        <button onclick="checkMCQ('c-mcq-1', 0, 1)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">A) June 20th</button>
+                        <button onclick="checkMCQ('c-mcq-1', 1, 1)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">B) June 24th</button>
+                        <button onclick="checkMCQ('c-mcq-1', 2, 1)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">C) July 24th</button>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm" id="c-mcq-2">
+                    <p class="font-medium text-slate-800 text-sm mb-3">2. When is Shakira's birthday?</p>
+                    <div class="flex flex-col gap-2">
+                        <button onclick="checkMCQ('c-mcq-2', 0, 0)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">A) February 2nd</button>
+                        <button onclick="checkMCQ('c-mcq-2', 1, 0)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">B) February 20th</button>
+                        <button onclick="checkMCQ('c-mcq-2', 2, 0)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">C) March 2nd</button>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm" id="c-mcq-3">
+                    <p class="font-medium text-slate-800 text-sm mb-3">3. When is Zendaya's birthday?</p>
+                    <div class="flex flex-col gap-2">
+                        <button onclick="checkMCQ('c-mcq-3', 0, 1)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">A) September 11th</button>
+                        <button onclick="checkMCQ('c-mcq-3', 1, 1)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">B) September 1st</button>
+                        <button onclick="checkMCQ('c-mcq-3', 2, 1)" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 rounded text-xs font-medium transition">C) November 1st</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 3: Library Registration -->
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-list-ol"></i> Activity 3: Library Registration</h4>
+                <ol>
+                    <li>Read the dialogue between the librarian and the new student.</li>
+                    <li>Fill in the blanks with the correct information.</li>
+                </ol>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 font-nunito text-slate-700 leading-relaxed text-lg shadow-inner">
+                    <p class="mb-4"><strong class="text-blue-700">Librarian:</strong> Hello! Welcome to the city library. Do you want a library card?</p>
+                    <p class="mb-4"><strong class="text-emerald-700">Student:</strong> Yes, please.</p>
+                    <p class="mb-4"><strong class="text-blue-700">Librarian:</strong> Great. First, what is your name?</p>
+                    <p class="mb-4"><strong class="text-emerald-700">Student:</strong> My name is Maria Gomez.</p>
+                    <p class="mb-4"><strong class="text-blue-700">Librarian:</strong> How do you spell your last name?</p>
+                    <p class="mb-4"><strong class="text-emerald-700">Student:</strong> It is 
+                        <select id="lib-1" class="border border-slate-300 rounded p-1 text-sm font-bold text-amber-600 outline-none">
+                            <option value="">---</option><option value="wrong">J-O-N-E-S</option><option value="correct">G-O-M-E-Z</option>
+                        </select>.
+                    </p>
+                    <p class="mb-4"><strong class="text-blue-700">Librarian:</strong> Thank you. And when is your birthday?</p>
+                    <p class="mb-4"><strong class="text-emerald-700">Student:</strong> My birthday is 
+                        <select id="lib-2" class="border border-slate-300 rounded p-1 text-sm font-bold text-amber-600 outline-none">
+                            <option value="">---</option><option value="correct">on October 15th</option><option value="wrong">in 15 October</option>
+                        </select>. (10/15)
+                    </p>
+                    <p class="mb-4"><strong class="text-blue-700">Librarian:</strong> Excellent. What is your phone number?</p>
+                    <p class="mb-4"><strong class="text-emerald-700">Student:</strong> It is five-five-five, zero-two-one-nine.
+                        <input type="text" id="lib-3" class="border-b-2 border-slate-300 bg-transparent px-2 w-24 outline-none font-bold text-amber-600 focus:border-amber-500 text-sm ml-2 text-center" placeholder="Digits...">
+                    </p>
+                    <p><strong class="text-blue-700">Librarian:</strong> Perfect. Here is your new card!</p>
+                </div>
+                <div class="mt-6 text-center">
+                    <button onclick="checkLibReg()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 px-8 rounded-full transition shadow-sm text-sm">Check Answers</button>
+                    <p id="lib-feedback" class="mt-2 font-bold h-5 text-sm"></p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                 <button onclick="switchTab('tab-listening')" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg transform hover:-translate-y-1">Next: Listening Lab 🎧 <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </section>
+
+        <section id="tab-listening" class="tab-content no-print">
+            <div class="transition-box border-l-blue-500 bg-blue-50">
+                <h4 class="text-blue-800"><i class="fa-solid fa-headphones"></i> Active Listening</h4>
+                <p>We need to train our ears. Let's practice listening to personal information like names, ages, and jobs using these interactive platforms.</p>
+            </div>
+            
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-users"></i> Activity 4: Pair Practice (ESL Video)</h4>
+                <ol>
+                    <li>Work with your partner. One person shares the screen.</li>
+                    <li>Click the blue <strong>"Open"</strong> button below to access the video quiz securely.</li>
+                    <li>Watch the video and answer the questions together.</li>
+                </ol>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                <!-- Practice 1: ESL Video -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-[400px]">
+                    <div class="bg-slate-100 p-3 border-b border-slate-200 flex justify-between items-center shadow-sm z-10">
+                        <span class="font-bold text-slate-700 text-sm truncate pr-4 flex items-center gap-2"><i class="fa-solid fa-globe text-blue-500"></i> ESL Video: Personal Info</span>
+                        <a href="https://eslvideo.com/quiz.php?id=36633" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded transition shrink-0 flex items-center gap-2">Open <i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="w-full flex-grow relative bg-slate-50 flex items-center justify-center p-6 text-center">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-sm">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-3xl mx-auto mb-4">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-lg mb-2">Video Quiz</h4>
+                            <p class="text-sm text-slate-500 mb-6">Click below to open the interactive video quiz in a new tab to avoid browser security blocks.</p>
+                            <a href="https://eslvideo.com/quiz.php?id=36633" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 px-6 rounded-full transition shadow-sm transform hover:-translate-y-1 text-sm">
+                                Start Quiz
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice 2: Test English -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-[400px]">
+                    <div class="bg-slate-100 p-3 border-b border-slate-200 flex justify-between items-center shadow-sm z-10">
+                        <span class="font-bold text-slate-700 text-sm truncate pr-4 flex items-center gap-2"><i class="fa-solid fa-globe text-blue-500"></i> Test-English: Listening</span>
+                        <a href="https://test-english.com/listening/a1/giving-personal-information-a1-english-listening-test/" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded transition shrink-0 flex items-center gap-2">Open <i class="fa-solid fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="w-full flex-grow relative bg-slate-50 flex items-center justify-center p-6 text-center">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 max-w-sm">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 text-3xl mx-auto mb-4">
+                                <i class="fa-solid fa-headphones"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-lg mb-2">Individual Practice</h4>
+                            <p class="text-sm text-slate-500 mb-6">Listen to the audio and answer the questions. Click to open safely in a new tab.</p>
+                            <a href="https://test-english.com/listening/a1/giving-personal-information-a1-english-listening-test/" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2.5 px-6 rounded-full transition shadow-sm transform hover:-translate-y-1 text-sm">
+                                Start Test
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                 <button onclick="switchTab('tab-nouns')" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg transform hover:-translate-y-1">Next: Nouns & Articles 📝 <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </section>
+
+        <section id="tab-nouns" class="tab-content no-print">
+            <div class="transition-box border-l-emerald-500 bg-emerald-50">
+                <h4 class="text-emerald-800"><i class="fa-solid fa-pen-nib"></i> Nouns & Articles (A / An)</h4>
+                <p>When we talk about our jobs or everyday objects, we must use <strong>A</strong> or <strong>An</strong>. We also need to know how to talk about more than one thing (Plurals).</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-2 border-b pb-2">What is a Noun? 🧠</h3>
+                <p class="text-sm text-slate-600 mb-4">A noun is a word that names a <strong>Person</strong> (doctor, Maria), a <strong>Place</strong> (hospital, Colombia), a <strong>Thing</strong> (computer, phone), or an <strong>Animal</strong> (dog, cat). Basically, it's everything around you!</p>
+                
+                <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2 mt-8">Rule 1: A vs. An (Singular)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl font-black text-emerald-600">A</span>
+                            <span class="font-bold text-slate-700">Consonant Sound</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-2">Use "A" before a word that starts with a consonant sound (b, c, d, f, t, etc.).</p>
+                        <p class="font-medium text-slate-800">Example: I am <strong class="text-emerald-600">a t</strong>eacher.</p>
+                        <p class="font-medium text-slate-800">Example: It is <strong class="text-emerald-600">a b</strong>ook.</p>
+                    </div>
+                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-2xl font-black text-indigo-600">An</span>
+                            <span class="font-bold text-slate-700">Vowel Sound</span>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-2">Use "An" before a word that starts with a vowel sound (a, e, i, o, u).</p>
+                        <p class="font-medium text-slate-800">Example: I am <strong class="text-indigo-600">an e</strong>ngineer.</p>
+                        <p class="font-medium text-slate-800">Example: It is <strong class="text-indigo-600">an a</strong>pple.</p>
+                    </div>
+                </div>
+
+                <!-- Activity 5: Choose A or An (Expanded to 15) -->
+                <div class="instruction-box">
+                    <h4><i class="fa-solid fa-list-ol"></i> Activity 5: Choose A or An</h4>
+                    <ol>
+                        <li>Click the toggle button to select the correct article for the 15 words below.</li>
+                    </ol>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <!-- Row 1 -->
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-1" onclick="toggleArticle('btn-art-1')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Doctor</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-2" onclick="toggleArticle('btn-art-2')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Artist</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-3" onclick="toggleArticle('btn-art-3')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Teacher</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-4" onclick="toggleArticle('btn-art-4')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Apple</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-5" onclick="toggleArticle('btn-art-5')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Manager</span>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-6" onclick="toggleArticle('btn-art-6')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Accountant</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-7" onclick="toggleArticle('btn-art-7')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Student</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-8" onclick="toggleArticle('btn-art-8')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Engineer</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-9" onclick="toggleArticle('btn-art-9')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Book</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-10" onclick="toggleArticle('btn-art-10')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Orange</span>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-11" onclick="toggleArticle('btn-art-11')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Umbrella</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-12" onclick="toggleArticle('btn-art-12')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Car</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-13" onclick="toggleArticle('btn-art-13')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Idea</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-14" onclick="toggleArticle('btn-art-14')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Actor</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <button id="btn-art-15" onclick="toggleArticle('btn-art-15')" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-1 px-4 rounded transition w-full" data-val="a">A</button>
+                        <span class="font-bold text-slate-800 text-sm">Phone</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <button onclick="checkArticles()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-8 rounded-full transition shadow-sm text-sm">Check 15 Articles</button>
+                    <p id="art-feedback" class="mt-2 font-bold h-5 text-sm"></p>
+                </div>
+            </div>
+
+            <!-- Singular vs Plural -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">Rule 2: Singular to Plural</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">1. Most Nouns: + s</p>
+                        <p class="text-sm text-slate-600">Car ➔ Car<strong class="text-emerald-600">s</strong></p>
+                        <p class="text-sm text-slate-600">Dog ➔ Dog<strong class="text-emerald-600">s</strong></p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">2. Ends in s, sh, ch, x: + es</p>
+                        <p class="text-sm text-slate-600">Bus ➔ Bus<strong class="text-emerald-600">es</strong></p>
+                        <p class="text-sm text-slate-600">Watch ➔ Watch<strong class="text-emerald-600">es</strong></p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <p class="font-bold text-slate-800 text-sm mb-1">3. Consonant + y: -ies</p>
+                        <p class="text-sm text-slate-600">City ➔ Cit<strong class="text-emerald-600">ies</strong></p>
+                        <p class="text-sm text-slate-600">Baby ➔ Bab<strong class="text-emerald-600">ies</strong></p>
+                    </div>
+                    <div class="bg-rose-50 p-3 rounded-lg border border-rose-200">
+                        <p class="font-bold text-rose-800 text-sm mb-1">4. Irregulars ⚠️</p>
+                        <p class="text-sm text-slate-600">Man ➔ M<strong class="text-rose-600">e</strong>n</p>
+                        <p class="text-sm text-slate-600">Child ➔ Child<strong class="text-rose-600">ren</strong></p>
+                        <p class="text-sm text-slate-600">Person ➔ P<strong class="text-rose-600">eople</strong></p>
+                    </div>
+                </div>
+
+                <!-- Activity 6: Write the Plurals -->
+                <div class="instruction-box">
+                    <h4><i class="fa-solid fa-list-ol"></i> Activity 6: Write the Plurals</h4>
+                    <ol>
+                        <li>Look at the singular noun.</li>
+                        <li>Type the correct plural form in the box.</li>
+                    </ol>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">1. Phone</span> ➔
+                        <input type="text" id="pl-1" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">2. Class</span> ➔
+                        <input type="text" id="pl-2" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">3. Country</span> ➔
+                        <input type="text" id="pl-3" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">4. Teacher</span> ➔
+                        <input type="text" id="pl-4" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">5. Box</span> ➔
+                        <input type="text" id="pl-5" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">6. Person</span> ➔
+                        <input type="text" id="pl-6" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">7. Child</span> ➔
+                        <input type="text" id="pl-7" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">8. Watch</span> ➔
+                        <input type="text" id="pl-8" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">9. Man</span> ➔
+                        <input type="text" id="pl-9" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                    <div class="flex items-center justify-between gap-3 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                        <span class="font-bold text-slate-600 w-24">10. Party</span> ➔
+                        <input type="text" id="pl-10" class="border-b-2 border-slate-300 flex-grow bg-transparent px-2 outline-none font-bold text-emerald-600 focus:border-emerald-500 text-sm transition" placeholder="...">
+                    </div>
+                </div>
+                <div class="mt-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p id="plural-feedback" class="font-bold text-sm h-5"></p>
+                    <button onclick="checkInputs([{id:'pl-1', a:'phones'}, {id:'pl-2', a:'classes'}, {id:'pl-3', a:'countries'}, {id:'pl-4', a:'teachers'}, {id:'pl-5', a:'boxes'}, {id:'pl-6', a:'people'}, {id:'pl-7', a:'children'}, {id:'pl-8', a:'watches'}, {id:'pl-9', a:'men'}, {id:'pl-10', a:'parties'}], 'plural-feedback')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-8 rounded-full transition shadow-sm text-sm">Check 10 Plurals</button>
+                </div>
+            </div>
+
+            <!-- Activity 7: Nouns in Context (MCQ) -->
+            <div class="instruction-box mt-8">
+                <h4><i class="fa-solid fa-list-ol"></i> Activity 7: Nouns in Context</h4>
+                <ol>
+                    <li>Read the sentence.</li>
+                    <li>Choose the correct noun form (singular or plural) to complete the sentence.</li>
+                </ol>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" id="act7-nouns-mcq">
+                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm" id="n-mcq-1">
+                    <p class="font-medium text-slate-800 mb-3 text-sm">1. Diego has two ___________.</p>
+                    <div class="flex gap-2">
+                        <button onclick="checkMCQ('n-mcq-1', 0, 1)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">cat</button>
+                        <button onclick="checkMCQ('n-mcq-1', 1, 1)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">cats</button>
+                    </div>
+                </div>
+                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm" id="n-mcq-2">
+                    <p class="font-medium text-slate-800 mb-3 text-sm">2. I see three ___________ in the park.</p>
+                    <div class="flex gap-2">
+                        <button onclick="checkMCQ('n-mcq-2', 0, 1)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">person</button>
+                        <button onclick="checkMCQ('n-mcq-2', 1, 1)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">people</button>
+                    </div>
+                </div>
+                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm" id="n-mcq-3">
+                    <p class="font-medium text-slate-800 mb-3 text-sm">3. She is a beautiful ___________.</p>
+                    <div class="flex gap-2">
+                        <button onclick="checkMCQ('n-mcq-3', 0, 0)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">woman</button>
+                        <button onclick="checkMCQ('n-mcq-3', 1, 0)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">women</button>
+                    </div>
+                </div>
+                <div class="p-4 bg-white rounded-xl border border-slate-200 shadow-sm" id="n-mcq-4">
+                    <p class="font-medium text-slate-800 mb-3 text-sm">4. The school has many ___________.</p>
+                    <div class="flex gap-2">
+                        <button onclick="checkMCQ('n-mcq-4', 0, 1)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">class</button>
+                        <button onclick="checkMCQ('n-mcq-4', 1, 1)" class="flex-1 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-2 rounded-lg text-sm transition">classes</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                 <button onclick="switchTab('tab-tobe')" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg transform hover:-translate-y-1">Next: Verb To Be 🅰️ <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </section>
+
+        <section id="tab-tobe" class="tab-content no-print">
+            <div class="transition-box border-l-purple-500 bg-purple-50">
+                <h4 class="text-purple-800"><i class="fa-solid fa-layer-group"></i> The Verb To Be</h4>
+                <p>We use the verb <strong>To Be</strong> (am, is, are) to talk about names, ages, professions, and locations. It is the engine of English!</p>
+            </div>
+
+            <!-- Theory Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Pronouns -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">Subject Pronouns</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100"><span class="text-2xl">🙋‍♂️</span> <span class="font-bold">I</span> <span class="text-xs text-slate-500">(Yo)</span></div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100"><span class="text-2xl">👉</span> <span class="font-bold">You</span> <span class="text-xs text-slate-500">(Tú / Uds)</span></div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100"><span class="text-2xl">👨</span> <span class="font-bold">He</span> <span class="text-xs text-slate-500">(Él)</span></div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100"><span class="text-2xl">👩</span> <span class="font-bold">She</span> <span class="text-xs text-slate-500">(Ella)</span></div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100"><span class="text-2xl">📱</span> <span class="font-bold">It</span> <span class="text-xs text-slate-500">(Cosa/Animal)</span></div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100"><span class="text-2xl">👨‍👩‍👦</span> <span class="font-bold">We</span> <span class="text-xs text-slate-500">(Nosotros)</span></div>
+                        <div class="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100 col-span-2 justify-center"><span class="text-2xl">🧑‍🤝‍🧑</span> <span class="font-bold">They</span> <span class="text-xs text-slate-500">(Ellos)</span></div>
+                    </div>
+                </div>
+
+                <!-- Functions -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">Functions of "To Be"</h3>
+                    <p class="text-sm text-slate-600 mb-4">We use "To Be" to describe people and things. Here are the 5 main functions:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3"><div class="w-8 h-8 rounded bg-blue-100 text-blue-600 flex items-center justify-center font-bold">1</div><p class="font-medium text-slate-700"><strong>Name:</strong> I <span class="text-purple-600 font-bold">am</span> Diego.</p></li>
+                        <li class="flex items-center gap-3"><div class="w-8 h-8 rounded bg-red-100 text-red-600 flex items-center justify-center font-bold">2</div><p class="font-medium text-slate-700"><strong>Age:</strong> She <span class="text-purple-600 font-bold">is</span> 20 years old.</p></li>
+                        <li class="flex items-center gap-3"><div class="w-8 h-8 rounded bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">3</div><p class="font-medium text-slate-700"><strong>Profession:</strong> He <span class="text-purple-600 font-bold">is</span> a doctor.</p></li>
+                        <li class="flex items-center gap-3"><div class="w-8 h-8 rounded bg-amber-100 text-amber-600 flex items-center justify-center font-bold">4</div><p class="font-medium text-slate-700"><strong>Origin:</strong> They <span class="text-purple-600 font-bold">are</span> from Mexico.</p></li>
+                        <li class="flex items-center gap-3"><div class="w-8 h-8 rounded bg-pink-100 text-pink-600 flex items-center justify-center font-bold">5</div><p class="font-medium text-slate-700"><strong>Description:</strong> We <span class="text-purple-600 font-bold">are</span> happy.</p></li>
+                    </ul>
+                    <div class="mt-3 bg-red-50 p-2 rounded border border-red-200 text-xs font-bold text-red-700 text-center">⚠️ In English, we do NOT "have" years. We "are" years old!</div>
+                </div>
+            </div>
+
+            <!-- Conjugation Table -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 overflow-x-auto">
+                <table class="w-full text-center border-collapse min-w-[500px]">
+                    <thead>
+                        <tr class="bg-purple-100 border-b-2 border-purple-200 text-purple-800 text-sm uppercase tracking-wider">
+                            <th class="p-3 font-bold">Pronoun</th>
+                            <th class="p-3 font-bold">Affirmative (+)</th>
+                            <th class="p-3 font-bold text-slate-500">Negative (-)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-slate-800 font-medium">
+                        <tr><td class="p-3">I</td><td class="p-3"><strong class="text-purple-600">am</strong></td><td class="p-3 text-slate-500">am not</td></tr>
+                        <tr class="bg-slate-50/50"><td class="p-3">You</td><td class="p-3"><strong class="text-purple-600">are</strong></td><td class="p-3 text-slate-500">are not (aren't)</td></tr>
+                        <tr><td class="p-3">He / She / It</td><td class="p-3"><strong class="text-purple-600">is</strong></td><td class="p-3 text-slate-500">is not (isn't)</td></tr>
+                        <tr class="bg-slate-50/50"><td class="p-3">We / They</td><td class="p-3"><strong class="text-purple-600">are</strong></td><td class="p-3 text-slate-500">are not (aren't)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Activity 8: Dropdowns -->
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-list-ol"></i> Activity 8: Choose the correct Verb</h4>
+                <ol>
+                    <li>Read the sentence.</li>
+                    <li>Select the correct form of the verb "To Be" from the dropdown.</li>
+                </ol>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">1.</span> I 
+                        <select id="tb-1" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="correct">am</option><option value="wrong">is</option><option value="wrong">are</option></select>
+                        from Canada.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">2.</span> She 
+                        <select id="tb-2" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="correct">is</option><option value="wrong">are</option></select>
+                        a good student.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">3.</span> We 
+                        <select id="tb-3" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="wrong">is</option><option value="correct">are</option></select>
+                        20 years old.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">4.</span> It 
+                        <select id="tb-4" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="correct">is</option><option value="wrong">are</option></select>
+                        my book.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">5.</span> They 
+                        <select id="tb-5" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="wrong">is</option><option value="correct">are</option></select>
+                        not teachers.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">6.</span> You 
+                        <select id="tb-6" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="wrong">is</option><option value="correct">are</option></select>
+                        a great chef.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">7.</span> He 
+                        <select id="tb-7" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="correct">is</option><option value="wrong">are</option></select>
+                        not from Mexico.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">8.</span> Maria 
+                        <select id="tb-8" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="correct">is</option><option value="wrong">are</option></select>
+                        an artist.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">9.</span> I 
+                        <select id="tb-9" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="correct">am</option><option value="wrong">is</option><option value="wrong">are</option></select>
+                        not an engineer.
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <span class="font-bold text-slate-600 w-6">10.</span> The dogs 
+                        <select id="tb-10" class="border border-slate-300 rounded p-1 text-sm font-bold text-purple-700 outline-none"><option value="">---</option><option value="wrong">am</option><option value="wrong">is</option><option value="correct">are</option></select>
+                        beautiful.
+                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <button onclick="checkDropdowns(['tb-1', 'tb-2', 'tb-3', 'tb-4', 'tb-5', 'tb-6', 'tb-7', 'tb-8', 'tb-9', 'tb-10'], 'tbd-feedback')" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-2 px-8 rounded-full transition shadow-sm text-sm">Check 10 Answers</button>
+                    <p id="tbd-feedback" class="mt-2 font-bold h-5 text-sm"></p>
+                </div>
+            </div>
+            
+            <!-- Activity 9: Reading Comprehension -->
+            <div class="instruction-box mt-8">
+                <h4><i class="fa-solid fa-book-open"></i> Activity 9: Reading Comprehension</h4>
+                <ol>
+                    <li>Read the short text about Sarah and her friends.</li>
+                    <li>Answer the True or False questions below.</li>
+                </ol>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 font-nunito text-slate-700 leading-relaxed text-lg shadow-inner mb-6">
+                    <p>"Hello! I am Sarah. I am 22 years old and I am a student at the university. I am from Canada, but I am in London now. London is a beautiful city, but it is cold. My best friend is Tom. He is 24 years old. He is an engineer. Tom is from Australia. We are not in the same class, but we are happy in London."</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="act9-reading-container">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm" id="r-mcq-1">
+                        <p class="font-medium text-slate-800 mb-3 text-sm">1. Sarah is 24 years old.</p>
+                        <div class="flex gap-2">
+                            <button onclick="checkMCQ('r-mcq-1', 0, 1)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">True</button>
+                            <button onclick="checkMCQ('r-mcq-1', 1, 1)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">False</button>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm" id="r-mcq-2">
+                        <p class="font-medium text-slate-800 mb-3 text-sm">2. Sarah is a student.</p>
+                        <div class="flex gap-2">
+                            <button onclick="checkMCQ('r-mcq-2', 0, 0)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">True</button>
+                            <button onclick="checkMCQ('r-mcq-2', 1, 0)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">False</button>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm" id="r-mcq-3">
+                        <p class="font-medium text-slate-800 mb-3 text-sm">3. London is a hot city.</p>
+                        <div class="flex gap-2">
+                            <button onclick="checkMCQ('r-mcq-3', 0, 1)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">True</button>
+                            <button onclick="checkMCQ('r-mcq-3', 1, 1)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">False</button>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 shadow-sm" id="r-mcq-4">
+                        <p class="font-medium text-slate-800 mb-3 text-sm">4. Tom is an engineer from Australia.</p>
+                        <div class="flex gap-2">
+                            <button onclick="checkMCQ('r-mcq-4', 0, 0)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">True</button>
+                            <button onclick="checkMCQ('r-mcq-4', 1, 0)" class="flex-1 bg-white hover:bg-slate-100 transition border border-slate-200 py-1.5 px-3 rounded text-sm text-left">False</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 10: Unscramble -->
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-list-ol"></i> Activity 10: Grammar Unscramble</h4>
+                <ol>
+                    <li>Click the words in the correct order to build 10 perfect sentences.</li>
+                    <li>Pay attention to affirmative vs. negative structures!</li>
+                </ol>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10" id="unscramble-tobe-container">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="text-center">
+                 <button onclick="switchTab('tab-mission')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-full font-bold transition shadow-lg transform hover:-translate-y-1">Next: Social Bio 🏁 <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </section>
+
+        <section id="tab-mission" class="tab-content">
+            <div class="bg-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl text-white relative overflow-hidden mb-10 no-print">
+                <div class="absolute -right-10 -bottom-10 text-9xl opacity-5 pointer-events-none">📱</div>
+                <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#6366f1 2px, transparent 2px); background-size: 30px 30px;"></div>
+                
+                <div class="text-center relative z-10 mb-10">
+                    <span class="bg-emerald-500 text-slate-900 text-xs font-black px-4 py-2 rounded-full uppercase tracking-wider shadow-sm">Activity 11: Productive Task</span>
+                    <h2 class="text-3xl md:text-5xl font-poppins font-black mt-4 mb-4">Social Media Bio Builder</h2>
+                    <p class="text-slate-300 max-w-2xl mx-auto text-lg">Use the grammar and vocabulary we learned today (Verb to Be, Dates, Occupations) to build your English social media profile!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10 items-start">
+                    
+                    <!-- Form to Add Bio -->
+                    <div class="bg-slate-800/80 p-6 md:p-8 rounded-2xl backdrop-blur-sm border border-slate-600 shadow-xl w-full">
+                        <h3 class="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2 border-b border-slate-600 pb-2"><i class="fa-solid fa-pen-to-square"></i> Edit Profile Info</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-bold">First & Last Name</label>
+                                <input type="text" id="sm-name" oninput="updateBio()" class="w-full bg-slate-900 border border-slate-500 rounded p-2 text-white outline-none focus:border-indigo-400 text-sm" placeholder="e.g. Maria Gomez">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-bold">Username</label>
+                                    <input type="text" id="sm-user" oninput="updateBio()" class="w-full bg-slate-900 border border-slate-500 rounded p-2 text-white outline-none focus:border-indigo-400 text-sm" placeholder="e.g. @mariag">
+                                </div>
+                                <div>
+                                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-bold">Age (Number)</label>
+                                    <input type="text" id="sm-age" oninput="updateBio()" class="w-full bg-slate-900 border border-slate-500 rounded p-2 text-white outline-none focus:border-indigo-400 text-sm" placeholder="e.g. 25">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-bold">Occupation (Add A/An!)</label>
+                                <input type="text" id="sm-job" oninput="updateBio()" class="w-full bg-slate-900 border border-slate-500 rounded p-2 text-white outline-none focus:border-indigo-400 text-sm" placeholder="e.g. An engineer">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-bold">Location (City, Country)</label>
+                                <input type="text" id="sm-loc" oninput="updateBio()" class="w-full bg-slate-900 border border-slate-500 rounded p-2 text-white outline-none focus:border-indigo-400 text-sm" placeholder="e.g. Bogota, Colombia">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1 font-bold">Birthday (Month DDth)</label>
+                                <input type="text" id="sm-birth" oninput="updateBio()" class="w-full bg-slate-900 border border-slate-500 rounded p-2 text-white outline-none focus:border-indigo-400 text-sm" placeholder="e.g. October 15th">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smartphone UI Preview -->
+                    <div class="w-full flex justify-center pt-4">
+                        <div class="smartphone-ui text-slate-800 font-sans">
+                            <div class="smartphone-notch"></div>
+                            
+                            <!-- Header -->
+                            <div class="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 pt-4">
+                                <i class="fa-solid fa-arrow-left text-slate-400"></i>
+                                <span class="font-bold text-sm" id="render-user">@username</span>
+                                <i class="fa-solid fa-ellipsis text-slate-400"></i>
+                            </div>
+                            
+                            <!-- Profile Top -->
+                            <div class="p-4 flex items-center gap-4">
+                                <div class="w-20 h-20 bg-gradient-to-tr from-rose-400 to-amber-500 rounded-full p-1">
+                                    <div class="w-full h-full bg-white rounded-full flex items-center justify-center text-3xl overflow-hidden border-2 border-white">
+                                        👤
+                                    </div>
+                                </div>
+                                <div class="flex-grow flex justify-between text-center">
+                                    <div><p class="font-black text-sm">12</p><p class="text-[10px] text-slate-500">Posts</p></div>
+                                    <div><p class="font-black text-sm">2.4k</p><p class="text-[10px] text-slate-500">Followers</p></div>
+                                    <div><p class="font-black text-sm">300</p><p class="text-[10px] text-slate-500">Following</p></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Bio Text -->
+                            <div class="px-4 pb-4 border-b border-slate-200">
+                                <p class="font-bold text-sm mb-1" id="render-name">Your Name</p>
+                                <div class="text-sm leading-snug space-y-1">
+                                    <p>✨ I am <span id="render-age" class="font-bold text-indigo-600">[Age]</span> years old.</p>
+                                    <p>💼 I am <span id="render-job" class="font-bold text-indigo-600">[Occupation]</span>.</p>
+                                    <p>📍 I am from <span id="render-loc" class="font-bold text-indigo-600">[Location]</span>.</p>
+                                    <p>🎂 My birthday is on <span id="render-birth" class="font-bold text-indigo-600">[Birthday]</span>.</p>
+                                </div>
+                                <div class="mt-3 flex gap-2">
+                                    <button class="flex-grow bg-slate-100 hover:bg-slate-200 font-bold text-xs py-1.5 rounded transition">Follow</button>
+                                    <button class="flex-grow bg-slate-100 hover:bg-slate-200 font-bold text-xs py-1.5 rounded transition">Message</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Grid -->
+                            <div class="grid grid-cols-3 gap-0.5 mt-0.5">
+                                <div class="bg-slate-200 aspect-square"></div><div class="bg-slate-300 aspect-square"></div><div class="bg-slate-200 aspect-square"></div>
+                                <div class="bg-slate-300 aspect-square"></div><div class="bg-slate-200 aspect-square"></div><div class="bg-slate-300 aspect-square"></div>
+                                <div class="bg-slate-200 aspect-square"></div><div class="bg-slate-300 aspect-square"></div><div class="bg-slate-200 aspect-square"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center pt-6 pb-10 no-print">
+                <p class="text-slate-500 font-medium text-lg">Amazing profile! Be ready to present your bio to the class. See you next time! 👋</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast" class="toast no-print"></div>
+
+    <script>
+        // Global State
+        let answeredQuestions = new Set(); 
+
+        // UI Functions
+        function switchTab(tabId) {
+            try {
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                const tabs = ['tab-warmup', 'tab-dates', 'tab-listening', 'tab-nouns', 'tab-tobe', 'tab-mission'];
+                
+                tabs.forEach(id => {
+                    const btn = document.getElementById(`btn-${id}`);
+                    if (btn) btn.className = "px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 text-slate-500 hover:bg-slate-100 whitespace-nowrap";
+                });
+                
+                const target = document.getElementById(tabId);
+                if (target) target.classList.add('active');
+                
+                const activeBtn = document.getElementById(`btn-${tabId}`);
+                if (activeBtn) activeBtn.className = "px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 bg-slate-800 text-white shadow-md whitespace-nowrap";
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (e) { console.error('switchTab error:', e); }
+        }
+
+        function showToast(msg, type = 'success') {
+            try {
+                const toast = document.getElementById('toast');
+                toast.textContent = msg;
+                toast.className = `toast toast-${type} show`;
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            } catch (e) { console.error(e); }
+        }
+
+        // ==========================================
+        // TEXT-TO-SPEECH
+        // ==========================================
+        function speakText(text, rate = 0.9) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = rate; 
+                    window.speechSynthesis.speak(utterance);
+                }, 50);
+            } else {
+                showToast("Audio not supported in this browser.", "error");
+            }
+        }
+
+        function spellAudio(spelledWord) {
+            speakText(spelledWord, 0.5);
+        }
+
+        // ==========================================
+        // MULTIPLE CHOICE / DROPDOWNS / INPUTS
+        // ==========================================
+        function checkMCQ(containerId, guessIndex, correctIndex) {
+            if (answeredQuestions.has(containerId)) return;
+            const container = document.getElementById(containerId);
+            const buttons = container.querySelectorAll('button');
+            
+            if (guessIndex === correctIndex) {
+                buttons[guessIndex].classList.add('correct-highlight');
+                showToast('✅ Correct!', 'success');
+                answeredQuestions.add(containerId);
+            } else {
+                buttons[guessIndex].classList.add('wrong-highlight');
+                showToast('❌ Not quite. Try again.', 'error');
+                setTimeout(() => { buttons[guessIndex].classList.remove('wrong-highlight'); }, 1000);
+            }
+        }
+
+        function checkDropdowns(idsArray, sectionId) {
+            let allCorrect = true;
+            idsArray.forEach(id => {
+                const select = document.getElementById(id);
+                if (!select) return;
+                
+                if (select.value === 'correct') {
+                    select.classList.remove('border-slate-300', 'border-red-400');
+                    select.classList.add('border-green-400', 'bg-green-50', 'text-green-700');
+                } else {
+                    allCorrect = false;
+                    if (select.value !== "") {
+                        select.classList.remove('border-slate-300');
+                        select.classList.add('border-red-400', 'bg-red-50', 'text-red-700');
+                    }
+                }
+            });
+
+            const feedback = document.getElementById(sectionId);
+            if (allCorrect) {
+                if (feedback) { feedback.textContent = "✅ All 10 correct!"; feedback.className = "mt-3 font-bold h-5 text-sm text-green-600"; }
+                showToast("✅ Well done!", "success");
+            } else {
+                if (feedback) { feedback.textContent = "❌ Some answers are incorrect. Try again!"; feedback.className = "mt-3 font-bold h-5 text-sm text-red-500"; }
+                showToast("❌ Check your answers.", "error");
+            }
+        }
+
+        function checkInputs(inputsArray, feedbackId) {
+            let allCorrect = true;
+            inputsArray.forEach(item => {
+                const input = document.getElementById(item.id);
+                if (!input) return;
+                const val = input.value.trim().toLowerCase().replace(/\s/g, ''); 
+                const target = item.a.toLowerCase().replace(/\s/g, '');
+                
+                if (val === target) {
+                    input.classList.remove('border-slate-300', 'border-red-400');
+                    input.classList.add('border-green-500', 'text-green-700');
+                } else {
+                    allCorrect = false;
+                    if (val !== "") {
+                        input.classList.remove('border-slate-300', 'border-green-500');
+                        input.classList.add('border-red-400', 'text-red-700');
+                    }
+                }
+            });
+            
+            const feedbackEl = document.getElementById(feedbackId);
+            if (feedbackEl) {
+                if (allCorrect) {
+                    feedbackEl.textContent = "✅ All correct!";
+                    feedbackEl.className = "text-right font-bold text-sm h-5 text-green-600";
+                } else {
+                    feedbackEl.textContent = "❌ Check the red boxes.";
+                    feedbackEl.className = "text-right font-bold text-sm h-5 text-red-500";
+                }
+            }
+        }
+
+        // ==========================================
+        // ACTIVITY: JOB TRIVIA (10 Questions)
+        // ==========================================
+        const jobTriviaData = [
+            { q: "I work in a hospital. I help sick people. I am not a nurse. What am I?", options: ["A police officer", "A doctor", "A manager"], correct: 1 },
+            { q: "I work in a kitchen. I make delicious food for a restaurant. What am I?", options: ["A chef", "An artist", "A driver"], correct: 0 },
+            { q: "I use a computer all day. I write code and make software. What am I?", options: ["A programmer", "An engineer", "A student"], correct: 0 },
+            { q: "I sit in a car all day. I take people from the airport to the hotel. What am I?", options: ["A pilot", "A firefighter", "A driver"], correct: 2 },
+            { q: "I study in a university. I read many books and take exams. What am I?", options: ["A teacher", "A student", "A lawyer"], correct: 1 },
+            { q: "I design machines, roads, or bridges. I love math and physics. What am I?", options: ["An artist", "An engineer", "A doctor"], correct: 1 },
+            { q: "I protect people. I drive a car with sirens. I catch bad guys. What am I?", options: ["A police officer", "A firefighter", "A lawyer"], correct: 0 },
+            { q: "I work in a store. I help customers buy clothes and shoes. What am I?", options: ["A manager", "An accountant", "A salesperson"], correct: 2 },
+            { q: "I defend people in court. I know a lot about the law. What am I?", options: ["A lawyer", "A police officer", "A teacher"], correct: 0 },
+            { q: "I work with numbers and money. I help companies with taxes. What am I?", options: ["A manager", "A programmer", "An accountant"], correct: 2 }
+        ];
+        let currentJobIndex = 0;
+
+        function startJobTrivia() {
+            currentJobIndex = 0;
+            renderJobTrivia();
+        }
+
+        function renderJobTrivia() {
+            if (currentJobIndex >= jobTriviaData.length) {
+                document.getElementById('job-trivia-question').innerHTML = "<span class='text-emerald-400 text-4xl'>🎉 All 10 Jobs Guessed!</span>";
+                document.getElementById('job-trivia-options').innerHTML = `<button onclick="startJobTrivia()" class="md:col-span-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xl px-12 py-4 rounded-full shadow-md transform hover:scale-105 transition-all">PLAY AGAIN 🔄</button>`;
+                document.getElementById('job-trivia-progress').textContent = "Complete!";
+                return;
+            }
+
+            const q = jobTriviaData[currentJobIndex];
+            document.getElementById('job-trivia-question').textContent = q.q;
+            document.getElementById('job-trivia-progress').textContent = `Question ${currentJobIndex + 1} / 10`;
+
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                optionsHtml += `<button onclick="checkJobTrivia(${idx}, ${q.correct})" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 px-6 rounded-xl border-2 border-slate-600 hover:border-emerald-400 transition text-lg w-full">${opt}</button>`;
+            });
+            document.getElementById('job-trivia-options').innerHTML = optionsHtml;
+        }
+
+        function checkJobTrivia(guess, correct) {
+            const optionsBox = document.getElementById('job-trivia-options');
+            const buttons = optionsBox.querySelectorAll('button');
+            
+            if (guess === correct) {
+                buttons[guess].classList.replace('bg-slate-700', 'bg-green-600');
+                buttons[guess].classList.replace('border-slate-600', 'border-green-500');
+                showToast("✅ Correct!", "success");
+                setTimeout(() => {
+                    currentJobIndex++;
+                    renderJobTrivia();
+                }, 800);
+            } else {
+                buttons[guess].classList.replace('bg-slate-700', 'bg-red-600');
+                buttons[guess].classList.replace('border-slate-600', 'border-red-500');
+                showToast("❌ Try again!", "error");
+                setTimeout(() => {
+                    buttons[guess].classList.replace('bg-red-600', 'bg-slate-700');
+                    buttons[guess].classList.replace('border-red-500', 'border-slate-600');
+                }, 800);
+            }
+        }
+
+        // ==========================================
+        // ACTIVITY: LIBRARY REGISTRATION
+        // ==========================================
+        function checkLibReg() {
+            let allCorrect = true;
+            
+            const dd1 = document.getElementById('lib-1');
+            const dd2 = document.getElementById('lib-2');
+            const in3 = document.getElementById('lib-3');
+            
+            if (dd1.value === 'correct') { dd1.classList.replace('text-amber-600', 'text-green-600'); } else { allCorrect = false; }
+            if (dd2.value === 'correct') { dd2.classList.replace('text-amber-600', 'text-green-600'); } else { allCorrect = false; }
+            
+            if (in3.value.trim().replace(/\s|-/g, '') === '5550219') {
+                in3.classList.add('border-green-500', 'text-green-600');
+                in3.classList.remove('text-amber-600');
+            } else {
+                allCorrect = false;
+                in3.classList.add('border-red-500', 'text-red-600');
+            }
+            
+            const fb = document.getElementById('lib-feedback');
+            if(allCorrect) {
+                fb.textContent = "✅ Card registered successfully!";
+                fb.className = "mt-2 font-bold h-5 text-sm text-green-600";
+            } else {
+                fb.textContent = "❌ Check your answers.";
+                fb.className = "mt-2 font-bold h-5 text-sm text-red-500";
+            }
+        }
+
+        // ==========================================
+        // ACTIVITY: A / AN TOGGLE
+        // ==========================================
+        const correctArticles = {
+            'btn-art-1': 'a', 'btn-art-2': 'an', 'btn-art-3': 'a', 'btn-art-4': 'an', 'btn-art-5': 'a',
+            'btn-art-6': 'an', 'btn-art-7': 'a', 'btn-art-8': 'an', 'btn-art-9': 'a', 'btn-art-10': 'an',
+            'btn-art-11': 'an', 'btn-art-12': 'a', 'btn-art-13': 'an', 'btn-art-14': 'an', 'btn-art-15': 'a'
+        };
+
+        function toggleArticle(id) {
+            const btn = document.getElementById(id);
+            if (btn.getAttribute('data-val') === 'a') {
+                btn.setAttribute('data-val', 'an');
+                btn.textContent = 'An';
+                btn.classList.replace('text-slate-700', 'text-indigo-700');
+            } else {
+                btn.setAttribute('data-val', 'a');
+                btn.textContent = 'A';
+                btn.classList.replace('text-indigo-700', 'text-slate-700');
+            }
+            btn.classList.remove('bg-green-200', 'bg-red-200');
+            btn.classList.add('bg-slate-200');
+        }
+
+        function checkArticles() {
+            let allCorrect = true;
+            for (let id in correctArticles) {
+                const btn = document.getElementById(id);
+                if (btn.getAttribute('data-val') === correctArticles[id]) {
+                    btn.classList.replace('bg-slate-200', 'bg-green-200');
+                    btn.classList.replace('bg-red-200', 'bg-green-200');
+                } else {
+                    btn.classList.replace('bg-slate-200', 'bg-red-200');
+                    btn.classList.replace('bg-green-200', 'bg-red-200');
+                    allCorrect = false;
+                }
+            }
+            
+            const fb = document.getElementById('art-feedback');
+            if (allCorrect) {
+                fb.textContent = "✅ Perfect!";
+                fb.className = "mt-2 font-bold h-5 text-sm text-green-600";
+            } else {
+                fb.textContent = "❌ Check the red boxes.";
+                fb.className = "mt-2 font-bold h-5 text-sm text-red-500";
+            }
+        }
+
+        // ==========================================
+        // ACTIVITY: TO BE UNSCRAMBLE (10 Items)
+        // ==========================================
+        const unscrambleToBeData = [
+            { q: "teacher / am / I / a", a: ["i", "am", "a", "teacher"] },
+            { q: "student / He / not / is / a", a: ["he", "is", "not", "a", "student"] },
+            { q: "are / from / Colombia / We", a: ["we", "are", "from", "colombia"] },
+            { q: "not / They / are / artists", a: ["they", "are", "not", "artists"] },
+            { q: "is / She / years / 25 / old", a: ["she", "is", "25", "years", "old"] },
+            { q: "not / I / am / doctor / a", a: ["i", "am", "not", "a", "doctor"] },
+            { q: "is / phone / my / It", a: ["it", "is", "my", "phone"] },
+            { q: "architects / are / You", a: ["you", "are", "architects"] },
+            { q: "He / my / is / friend", a: ["he", "is", "my", "friend"] },
+            { q: "not / is / It / Monday", a: ["it", "is", "not", "monday"] }
+        ];
+
+        function initToBeUnscramble() {
+            const container = document.getElementById('unscramble-tobe-container');
+            if (!container) return;
+            container.innerHTML = '';
+            unscrambleToBeData.forEach((item, index) => {
+                const words = item.q.split(' / ');
+                const shuffled = [...words].sort(() => Math.random() - 0.5);
+                
+                let wordsHtml = shuffled.map(w => `<button onclick="handleToBeUnscrambleClick(this, '${index}')" class="bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold py-1.5 px-3 rounded text-sm shadow-sm border border-purple-200 transition" data-word="${w.toLowerCase()}">${w}</button>`).join('');
+                
+                const html = `
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm" id="utobe-${index}">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Sentence ${index + 1}</span>
+                            <button onclick="resetToBeUnscramble('${index}')" class="text-[10px] text-slate-400 hover:text-slate-600"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-2 min-h-[30px]" id="wb-tobe-${index}">${wordsHtml}</div>
+                        <div class="droppable p-2 min-h-[40px] flex flex-wrap gap-2 items-center w-full bg-white" id="ab-tobe-${index}"></div>
+                        <p id="fb-tobe-${index}" class="text-xs font-bold mt-1 h-4 text-emerald-600"></p>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function handleToBeUnscrambleClick(btn, index) {
+            const answerBox = document.getElementById(`ab-tobe-${index}`);
+            answerBox.appendChild(btn);
+            const allBtns = answerBox.querySelectorAll('button');
+            if (allBtns.length === unscrambleToBeData[index].a.length) {
+                checkToBeUnscramble(index, allBtns);
+            }
+        }
+
+        function resetToBeUnscramble(index) {
+            const answerBox = document.getElementById(`ab-tobe-${index}`);
+            const wordBank = document.getElementById(`wb-tobe-${index}`);
+            const btns = answerBox.querySelectorAll('button');
+            btns.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('cursor-default', 'opacity-80');
+                wordBank.appendChild(btn);
+            });
+            document.getElementById(`fb-tobe-${index}`).textContent = "";
+            answerBox.classList.remove('bg-green-50', 'border-green-400', 'bg-red-50', 'border-red-400');
+            answerBox.classList.add('bg-white', 'border-slate-300');
+        }
+
+        function checkToBeUnscramble(index, btns) {
+            const answerBox = document.getElementById(`ab-tobe-${index}`);
+            const feedback = document.getElementById(`fb-tobe-${index}`);
+            let isCorrect = true;
+            const targetArray = unscrambleToBeData[index].a;
+            
+            btns.forEach((btn, i) => { if (btn.getAttribute('data-word') !== targetArray[i]) isCorrect = false; });
+
+            if (isCorrect) {
+                answerBox.classList.remove('border-slate-300', 'bg-white', 'bg-red-50', 'border-red-400');
+                answerBox.classList.add('border-green-400', 'bg-green-50');
+                feedback.textContent = "✅ Correct!";
+                feedback.className = "text-xs font-bold mt-1 h-4 text-green-600";
+                btns.forEach(b => { b.disabled = true; b.classList.add('cursor-default', 'opacity-80'); });
+            } else {
+                answerBox.classList.remove('border-slate-300', 'bg-white');
+                answerBox.classList.add('border-red-400', 'bg-red-50');
+                feedback.textContent = "❌ Not quite right. Click 'Reset'.";
+                feedback.className = "text-xs font-bold mt-1 h-4 text-red-500";
+            }
+        }
+
+        // ==========================================
+        // MISSION: SOCIAL BIO BUILDER
+        // ==========================================
+        function updateBio() {
+            try {
+                const name = document.getElementById('sm-name').value || 'Your Name';
+                const user = document.getElementById('sm-user').value || '@username';
+                const age = document.getElementById('sm-age').value || '[Age]';
+                const job = document.getElementById('sm-job').value || '[Occupation]';
+                const loc = document.getElementById('sm-loc').value || '[Location]';
+                const birth = document.getElementById('sm-birth').value || '[Birthday]';
+
+                document.getElementById('render-name').textContent = name;
+                document.getElementById('render-user').textContent = user;
+                document.getElementById('render-age').textContent = age;
+                document.getElementById('render-job').textContent = job;
+                document.getElementById('render-loc').textContent = loc;
+                document.getElementById('render-birth').textContent = birth;
+            } catch (e) {
+                console.error("Error updating bio: ", e);
+            }
+        }
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        window.onload = function() {
+            try { initToBeUnscramble(); } catch (e) { console.error('Unscramble error:', e); }
+            switchTab('tab-warmup');
+        };
+    </script>
+</body>
+</html>
